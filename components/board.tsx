@@ -12,6 +12,19 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
     const [board, setBoard] = useState<Cell[][]>(() => createBoard(rows, cols, mines));
     const [gameStatus, setGameStatus] = useState<"playing" | "win" | "lost">("playing");
     const [remainingMines, setRemainingMines] = useState<number>(mines);
+    const [time, setTime] = useState<number>(0);
+    const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+    const [unusedFlags, setUnusedFlags] = useState<number>(mines);
+
+    useEffect(() => {
+        let timerId: NodeJS.Timeout;
+        if (isTimerRunning && gameStatus === "playing") {
+            timerId = setInterval(() => {
+                setTime(prevTime => prevTime + 1);
+            }, 1000);
+        }
+        return () => clearInterval(timerId);
+    }, [isTimerRunning, gameStatus]);
 
     useEffect(() => {
         const unrevealedCells = board.flatMap(row => row.filter(cell => !cell.isRevealed));
@@ -28,10 +41,12 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
 
             setBoard(newBoard);
             setGameStatus("win");
+            setIsTimerRunning(false);
         }
 
         if (gameStatus === "playing" && checkWin(board)) {
             setGameStatus("win");
+            setIsTimerRunning(false);
         }
 
         const flaggedMines = board.flatMap(row => row.filter(cell => cell.isFlagged && cell.isMine)).length;
@@ -39,12 +54,18 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
     }, [board, gameStatus]);
 
     const revealCell = (row: number, col: number) => {
+        // Start timer on first move
+        if (!isTimerRunning) {
+            setIsTimerRunning(true);
+        }
+
         if (board[row][col].isRevealed || board[row][col].isFlagged) return;
 
         const newBoard = [...board];
 
         if (newBoard[row][col].isMine) {
             setGameStatus("lost");
+            setIsTimerRunning(false);
             newBoard.forEach((r) =>
                 r.forEach((cell) => {
                     cell.isRevealed = true;
@@ -77,10 +98,27 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
 
     const toggleFlag = (row: number, col: number, event: React.MouseEvent) => {
         event.preventDefault();
+
+        // Start timer on first flag
+        if (!isTimerRunning) {
+            setIsTimerRunning(true);
+        }
+
         if (board[row][col].isRevealed) return;
 
         const newBoard = [...board];
-        newBoard[row][col].isFlagged = !newBoard[row][col].isFlagged;
+
+        // If cell is not currently flagged and we have flags left
+        if (!newBoard[row][col].isFlagged) {
+            newBoard[row][col].isFlagged = true;
+            setUnusedFlags(prev => prev - 1);
+        }
+        // If cell is currently flagged, remove the flag
+        else if (newBoard[row][col].isFlagged) {
+            newBoard[row][col].isFlagged = false;
+            setUnusedFlags(prev => prev + 1);
+        }
+
         setBoard(newBoard);
     };
 
@@ -94,13 +132,50 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
         );
     };
 
+    const resetGame = () => {
+        setBoard(createBoard(rows, cols, mines));
+        setGameStatus("playing");
+        setTime(0);
+        setIsTimerRunning(false);
+        setUnusedFlags(mines);
+    };
+
+    // Format time to MM:SS
+    const formatTime = (totalSeconds: number) => {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    };
 
     return (
         <>
+            <div style={{
+                marginBottom: "10px",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "0 20px"
+            }}>
+                <div>🚩 Flags: {unusedFlags}</div>
+                <div>⏱️ Time: {formatTime(time)}</div>
+            </div>
             <div style={{ marginBottom: "10px", textAlign: "center" }}>
                 {gameStatus === "win" && <div style={{ color: "green", fontWeight: "bold" }}>🎉 You win!</div>}
                 {gameStatus === "lost" && <div style={{ color: "red", fontWeight: "bold" }}>💣 You lost!</div>}
                 {gameStatus === "playing" && <div style={{ fontWeight: "bold" }}>Keep playing!</div>}
+                <button
+                    onClick={resetGame}
+                    style={{
+                        padding: "5px 10px",
+                        backgroundColor: "#4CAF50",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer"
+                    }}
+                >
+                    New Game
+                </button>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 30px)` }}>
                 {board.map((row, rowIndex) =>

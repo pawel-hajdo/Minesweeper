@@ -37,6 +37,15 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
         setBoard(newBoard);
     };
 
+    const toggleFlag = (row: number, col: number, event: React.MouseEvent) => {
+        event.preventDefault();
+        if (board[row][col].isRevealed) return;
+
+        const newBoard = [...board];
+        newBoard[row][col].isFlagged = !newBoard[row][col].isFlagged;
+        setBoard(newBoard);
+    };
+
     return (
         <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 30px)` }}>
             {board.map((row, rowIndex) =>
@@ -55,7 +64,11 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
                             cursor: "pointer",
                         }}
                         onClick={() => revealCell(rowIndex, colIndex)}
+                        onContextMenu={(e) => toggleFlag(rowIndex, colIndex, e)}
                     >
+                        {cell.isFlagged && !cell.isRevealed && (
+                            <span style={{ color: "red", fontWeight: "bold" }}>🚩</span>
+                        )}
                         {cell.isRevealed && (cell.isMine ? "💣" : cell.adjacentMines || "")}
                     </div>
                 ))

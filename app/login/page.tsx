@@ -59,7 +59,7 @@ export default function Login() {
                 }
 
                 setMessage('Login successful!');
-                setTimeout(() => router.push('/chats'), 1000);
+                setTimeout(() => router.push('/'), 1000);
             } catch (error) {
                 setMessage(error.message);
                 console.error('Registration error:', error);

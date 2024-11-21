@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import Board from "@/components/board";
+import {getUsername} from "@/lib/utils";
 
 interface DifficultyLevel {
     name: string;
@@ -23,6 +24,34 @@ export default function Home() {
         setSelectedLevel(level);
         // Force re-render of Board component
         setKey(prev => prev + 1);
+    };
+
+    const submitGameResult = async (time: number, status: "win" | "lost") => {
+        if (status !== "win") return;
+
+        try {
+            const response = await fetch('/api/results', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: getUsername(),
+                    time,
+                    difficulty: selectedLevel.name.toLowerCase()
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit game result');
+            }
+
+            const result = await response.json();
+            console.log('Game result submitted:', result);
+        } catch (error) {
+            console.error('Error submitting game result:', error);
+        }
     };
 
     return (
@@ -52,6 +81,7 @@ export default function Home() {
                 rows={selectedLevel.rows}
                 cols={selectedLevel.cols}
                 mines={selectedLevel.mines}
+                onGameEnd={submitGameResult}
             />
         </div>
     );

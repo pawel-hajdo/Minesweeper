@@ -1,4 +1,4 @@
-import {NextResponse} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import prisma from "@/lib/prisma";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
@@ -7,21 +7,21 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const SubmitRequestSchema = z.object({
     username: z.string().min(1, "Username is required"),
-    time: z.number().positive("Time must be a positive number"),
+    time: z.number().nonnegative("Time must be a positive number"),
     difficulty: z.enum(["easy", "medium", "hard"], "Invalid difficulty level")
 });
 
-async function verifyToken(request: Request) {
-    const authHeader = request.headers.get("authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        throw new Error("Unauthorized");
+async function verifyToken(request: NextRequest) {
+    const token = request.cookies.get('token')?.value;
+
+    if (!token) {
+        throw new Error('Unauthorized: Missing token');
     }
 
-    const token = authHeader.split(" ")[1];
     try {
         return jwt.verify(token, JWT_SECRET as string);
     } catch (error) {
-        throw new Error("Invalid token");
+        throw new Error('Invalid token');
     }
 }
 
@@ -56,7 +56,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     try {
-        const user = await verifyToken(request);
+        await verifyToken(request);
 
         const requestBody = await request.json();
 
@@ -69,6 +69,7 @@ export async function POST(request: Request) {
         return NextResponse.json(newGameResult, { status: 201 });
     } catch (error) {
         if (error instanceof z.ZodError) {
+            console.error("Validation errors:", error.errors);
             return NextResponse.json(
                 {
                     message: "Validation error",
@@ -83,6 +84,6 @@ export async function POST(request: Request) {
                 { message: "Failed to submit game result" },
                 { status: 500 }
             );
-        };
+        }
     }
 }

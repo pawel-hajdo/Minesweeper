@@ -1,4 +1,3 @@
-// app/results/page.tsx
 "use client";
 import { useEffect, useState } from "react";
 import {Button} from "@nextui-org/button";
@@ -11,6 +10,7 @@ import {
     TableCell
 } from "@nextui-org/table";
 import {Select, SelectItem} from "@nextui-org/select";
+import {formatTime} from "@/lib/utils";
 
 interface GameResult {
     id: number;
@@ -30,7 +30,6 @@ const ResultsPage = () => {
     const [gameResults, setGameResults] = useState<GameResult[]>([]);
     const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
 
-    // Fetch results from the API
     const fetchGameResults = async (difficulty: string = "") => {
         const response = await fetch(`/api/results?difficulty=${difficulty}`);
         const data = await response.json();
@@ -44,13 +43,6 @@ const ResultsPage = () => {
 
     const handleSelectionChange = (e) => {
         setSelectedDifficulty(e.target.value)
-    };
-
-    // Format time to MM:SS
-    const formatTime = (time: number) => {
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     };
 
     return (

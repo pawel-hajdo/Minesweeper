@@ -9,8 +9,8 @@ export const siteConfig = {
             href: "/",
         },
         {
-            label: "Ranking",
-            href: "/ranking",
+            label: "Results",
+            href: "/results",
         },
     ],
     navMenuItems: [
@@ -25,8 +25,8 @@ export const siteConfig = {
             href: "/",
         },
         {
-            label: "Ranking",
-            href: "/ranking",
+            label: "Results",
+            href: "/results",
         },
         {
             label: "Logout",

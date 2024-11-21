@@ -6,15 +6,22 @@ interface BoardProps {
     rows: number;
     cols: number;
     mines: number;
+    onGameEnd?: (time: number, status: "win" | "lost") => void;
 }
 
-const Board = ({ rows, cols, mines }: BoardProps) => {
+const Board = ({ rows, cols, mines, onGameEnd }: BoardProps) => {
     const [board, setBoard] = useState<Cell[][]>(() => createBoard(rows, cols, mines));
     const [gameStatus, setGameStatus] = useState<"playing" | "win" | "lost">("playing");
     const [remainingMines, setRemainingMines] = useState<number>(mines);
     const [time, setTime] = useState<number>(0);
     const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
     const [unusedFlags, setUnusedFlags] = useState<number>(mines);
+
+    useEffect(() => {
+        if (gameStatus !== "playing" && onGameEnd) {
+            onGameEnd(time, gameStatus);
+        }
+    }, [gameStatus, time, onGameEnd]);
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;

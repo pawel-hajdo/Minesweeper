@@ -1,12 +1,12 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
+import {Navbar} from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -42,7 +42,8 @@ export default function RootLayout({
       >
       <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
         <div className="relative flex flex-col h-screen">
-          <main className="px-6 flex-grow h-full overflow-hidden">
+            <Navbar />
+          <main className="px-6 flex-grow h-full overflow-hidden container m-auto">
             {children}
           </main>
         </div>

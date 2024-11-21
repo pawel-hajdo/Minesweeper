@@ -1,20 +1,27 @@
 "use client"
 import React, {useEffect, useState} from "react";
 import {Cell, createBoard} from "@/utils/createBoard";
+import {formatTime} from "@/lib/utils";
 
 interface BoardProps {
     rows: number;
     cols: number;
     mines: number;
+    onGameEnd?: (time: number, status: "win" | "lost") => void;
 }
 
-const Board = ({ rows, cols, mines }: BoardProps) => {
+const Board = ({ rows, cols, mines, onGameEnd }: BoardProps) => {
     const [board, setBoard] = useState<Cell[][]>(() => createBoard(rows, cols, mines));
     const [gameStatus, setGameStatus] = useState<"playing" | "win" | "lost">("playing");
-    const [remainingMines, setRemainingMines] = useState<number>(mines);
     const [time, setTime] = useState<number>(0);
     const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
     const [unusedFlags, setUnusedFlags] = useState<number>(mines);
+
+    useEffect(() => {
+        if (gameStatus !== "playing" && onGameEnd) {
+            onGameEnd(time, gameStatus);
+        }
+    }, [gameStatus, time, onGameEnd]);
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;
@@ -49,8 +56,6 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
             setIsTimerRunning(false);
         }
 
-        const flaggedMines = board.flatMap(row => row.filter(cell => cell.isFlagged && cell.isMine)).length;
-        setRemainingMines(mines - flaggedMines);
     }, [board, gameStatus]);
 
     const revealCell = (row: number, col: number) => {
@@ -138,13 +143,6 @@ const Board = ({ rows, cols, mines }: BoardProps) => {
         setTime(0);
         setIsTimerRunning(false);
         setUnusedFlags(mines);
-    };
-
-    // Format time to MM:SS
-    const formatTime = (totalSeconds: number) => {
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     };
 
     return (

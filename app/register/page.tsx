@@ -25,7 +25,7 @@ export default function Register() {
     const router = useRouter();
 
     const validate = () => {
-        let formErrors = { email: '', username: '', password: '', confirmPassword: '' };
+        const formErrors = { email: '', username: '', password: '', confirmPassword: '' };
 
         if (!email)
             formErrors.email = "Email is required"

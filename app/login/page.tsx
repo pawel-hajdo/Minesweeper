@@ -20,7 +20,7 @@ export default function Login() {
     const router = useRouter();
 
     const validate = () => {
-        let formErrors = { email: '', password: ''};
+        const formErrors = { email: '', password: ''};
 
         if (!email)
             formErrors.email = "Email is required"
@@ -129,7 +129,7 @@ export default function Login() {
                     </CardBody>
                 </form>
                 <CardFooter className="flex justify-center gap-1">
-                    <p>Don't have an account?</p>
+                    <p>Don&#39;t have an account?</p>
                     <Link href="/register" color="primary">Register</Link>
                 </CardFooter>
             </Card>

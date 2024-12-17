@@ -6,7 +6,6 @@ export interface Cell {
 }
 
 export const createBoard = (rows: number, cols: number, mines: number): Cell[][] => {
-    // Tworzymy pustą planszę
     const board: Cell[][] = Array.from({ length: rows }, () =>
         Array.from({ length: cols }, () => ({
             isMine: false,
@@ -16,7 +15,6 @@ export const createBoard = (rows: number, cols: number, mines: number): Cell[][]
         }))
     );
 
-    // Losowe rozmieszczanie min
     let placedMines = 0;
     while (placedMines < mines) {
         const row = Math.floor(Math.random() * rows);
@@ -28,7 +26,6 @@ export const createBoard = (rows: number, cols: number, mines: number): Cell[][]
         }
     }
 
-    // Liczenie sąsiednich min dla każdej komórki
     const directions = [
         [-1, -1], [-1, 0], [-1, 1],
         [0, -1],          [0, 1],

@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf022d8e-4397-4aaa-a492-cb17dcb32935" name="Changes" comment="code clean up">
-      <change afterPath="$PROJECT_DIR$/__tests__/createBoard.test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/api/login.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/login/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/login/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -47,11 +48,59 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/Pawel/Documents/Minesweeper/minesweeper/node_modules/jest",
     "nodejs_package_manager_path": "npm",
     "ts.external.directory.path": "C:\\Users\\Pawel\\Documents\\Minesweeper\\minesweeper\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Jest.Integration tests for POST /api/login.should return 401 if password is incorrect">
+    <configuration name="Integration tests for POST /api/login" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/__tests__/api/login.test.ts" />
+      <test-names>
+        <test-name value="Integration tests for POST /api/login" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Integration tests for POST /api/login.should return 401 if password is incorrect" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/api/login.test.ts" />
+      <test-names>
+        <test-name value="Integration tests for POST /api/login" />
+        <test-name value="should return 401 if password is incorrect" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Integration tests for POST /api/login.should return 401 if user is not found" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/api/login.test.ts" />
+      <test-names>
+        <test-name value="Integration tests for POST /api/login" />
+        <test-name value="should return 401 if user is not found" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.Integration tests for POST /api/login.should return 401 if password is incorrect" />
+        <item itemvalue="Jest.Integration tests for POST /api/login.should return 401 if user is not found" />
+        <item itemvalue="Jest.Integration tests for POST /api/login" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

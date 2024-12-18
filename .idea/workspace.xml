@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf022d8e-4397-4aaa-a492-cb17dcb32935" name="Changes" comment="integration tests for login endpoint">
-      <change afterPath="$PROJECT_DIR$/__tests__/api/register.test.ts" afterDir="false" />
+    <list default="true" id="cf022d8e-4397-4aaa-a492-cb17dcb32935" name="Changes" comment="integration tests for register endpoint">
+      <change afterPath="$PROJECT_DIR$/__tests__/api/results.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/register/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/register/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/results/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/results/route.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,23 +34,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature-tests",
-    "last_opened_file_path": "C:/Users/Pawel/Documents/Minesweeper/minesweeper",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "C:/Users/Pawel/Documents/Minesweeper/minesweeper/node_modules/jest",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\Pawel\\Documents\\Minesweeper\\minesweeper\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-tests&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Pawel/Documents/Minesweeper/minesweeper&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/Pawel/Documents/Minesweeper/minesweeper/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Pawel\\Documents\\Minesweeper\\minesweeper\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Jest.Integration tests for POST /api/login.should return 401 if password is incorrect">
     <configuration name="Integration tests for POST /api/login" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
@@ -107,6 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1732209136039</updated>
       <workItem from="1732209137329" duration="11578000" />
+      <workItem from="1734541774971" duration="4324000" />
     </task>
     <task id="LOCAL-00001" summary="send results">
       <option name="closed" value="true" />
@@ -140,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734473136202</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="integration tests for register endpoint">
+      <option name="closed" value="true" />
+      <created>1734476855623</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1734476855623</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +171,7 @@
     <MESSAGE value="results page" />
     <MESSAGE value="code clean up" />
     <MESSAGE value="integration tests for login endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="integration tests for login endpoint" />
+    <MESSAGE value="integration tests for register endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="integration tests for register endpoint" />
   </component>
 </project>

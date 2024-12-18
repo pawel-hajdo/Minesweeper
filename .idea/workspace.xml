@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf022d8e-4397-4aaa-a492-cb17dcb32935" name="Changes" comment="integration tests for game results endpoints">
-      <change afterPath="$PROJECT_DIR$/__tests__/formatTime.test.ts" afterDir="false" />
+    <list default="true" id="cf022d8e-4397-4aaa-a492-cb17dcb32935" name="Changes" comment="unit tests for formatTime function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__tests__/formatTime.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/__tests__/formatTime.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1732209136039</updated>
       <workItem from="1732209137329" duration="11578000" />
-      <workItem from="1734541774971" duration="7258000" />
+      <workItem from="1734541774971" duration="8649000" />
     </task>
     <task id="LOCAL-00001" summary="send results">
       <option name="closed" value="true" />
@@ -156,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734546437066</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="unit tests for formatTime function">
+      <option name="closed" value="true" />
+      <created>1734549591365</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1734549591365</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +189,7 @@
     <MESSAGE value="integration tests for login endpoint" />
     <MESSAGE value="integration tests for register endpoint" />
     <MESSAGE value="integration tests for game results endpoints" />
-    <option name="LAST_COMMIT_MESSAGE" value="integration tests for game results endpoints" />
+    <MESSAGE value="unit tests for formatTime function" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit tests for formatTime function" />
   </component>
 </project>

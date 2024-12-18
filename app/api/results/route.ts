@@ -8,7 +8,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const SubmitRequestSchema = z.object({
     username: z.string().min(1, "Username is required"),
     time: z.number().nonnegative("Time must be a positive number"),
-    difficulty: z.enum(["easy", "medium", "hard"], "Invalid difficulty level")
+    difficulty: z.enum(["easy", "medium", "hard"]).refine(
+        (val) => ["easy", "medium", "hard"].includes(val),
+        { message: "Invalid difficulty level" }
+    ),
 });
 
 async function verifyToken(request: NextRequest) {
@@ -25,7 +28,7 @@ async function verifyToken(request: NextRequest) {
     }
 }
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     try {
         await verifyToken(request);
 
@@ -47,14 +50,15 @@ export async function GET(request: Request) {
 
         return NextResponse.json(gameResults, { status: 200 });
     } catch (error) {
+        const err = error as Error;
         return NextResponse.json(
-            { message: error.message || "Failed to fetch game results" },
+            { message: err.message || "Failed to fetch game results" },
             { status: 500 }
         );
     }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         await verifyToken(request);
 
@@ -69,7 +73,6 @@ export async function POST(request: Request) {
         return NextResponse.json(newGameResult, { status: 201 });
     } catch (error) {
         if (error instanceof z.ZodError) {
-            console.error("Validation errors:", error.errors);
             return NextResponse.json(
                 {
                     message: "Validation error",
@@ -80,10 +83,22 @@ export async function POST(request: Request) {
         }
 
         if (error instanceof Error) {
+            if (error.message === 'Unauthorized: Missing token') {
+                return NextResponse.json(
+                    { message: error.message },
+                    { status: 401 }
+                );
+            }
+
             return NextResponse.json(
-                { message: "Failed to submit game result" },
+                { message: error.message || "Failed to submit game result" },
                 { status: 500 }
             );
         }
+
+        return NextResponse.json(
+            { message: "An unexpected error occurred" },
+            { status: 500 }
+        );
     }
 }

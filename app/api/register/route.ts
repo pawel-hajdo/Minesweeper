@@ -41,7 +41,7 @@ export async function POST(request: Request) {
             { status: 201 }
         );
     } catch (error) {
-        console.error('Error during registration:', error);
+        // console.error('Error during registration:', error);
 
         return NextResponse.json(
             { message: 'Server error, please try again later' },

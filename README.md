@@ -7,7 +7,50 @@ Gra **Saper** to klasyczna gra logiczna, w której celem jest odkrycie wszystkic
 
 ---
 
-### Scenariusze testowe
+### Uruchomienie projektu
+```
+> npm i
+> npm run dev
+```
+Aplikacja będzie dostępna na porcie 3000
+
+### Uruchomienie testów
+```
+> npm i
+> npx jest
+```
+### Testy jednostkowe
+1. Test tworzenia planszy z poprawną liczbą wierszy i kolumn - [/__tests__/createBoard.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/createBoard.test.ts)
+2. Test tworzenia planszy z poprawną liczbą min - [/__tests__/createBoard.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/createBoard.test.ts)
+3. Test tworzenia planszy ze sprawdzeniem czy 2 miny nie są w tym samym miejscu  - [/__tests__/createBoard.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/createBoard.test.ts)
+4. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla pełnych minut  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+5. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla czasów poniżej minuty  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+6. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla 0 sekund  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+7. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla dużych wartości  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+8. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla ujemnych wartości  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+9. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla ułamkowych wartości  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+10. Test funkcji formatującej czas - sprawdzenie czy poprawnie formatuje dla wartości poniżej 1 sekundy  - [/__tests__/formatTime.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/formatTime.test.ts)
+    
+### Testy integracyjne
+1. Test logowania - powinno zwrócić błąd 401 gdy błędny email - [/__tests__/api/login.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/login.test.ts)
+2. Test logowania - powinno zwrócić błąd 401 gdy błęde hasło - [/__tests__/api/login.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/login.test.ts)
+3. Test logowania - powinno zwrócić błąd 500 gdy error bazy danych - [/__tests__/api/login.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/login.test.ts)
+4. Test rejestracji - powinno zarejestrować usera poprawnie - [/__tests__/api/register.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/register.test.ts)
+5. Test rejestracji - powinno zwrócić błąd gdy email zajęty - [/__tests__/api/register.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/register.test.ts)
+6. Test rejestracji - powinno zwrócić błąd 500 gdy error bazy danych - [/__tests__/api/register.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/register.test.ts)
+7. Test endpointu results - powinno poprawnie dodać wynik gry do bazy - [/__tests__/api/results.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/results.test.ts)
+8. Test endpointu results - powinno zwrócić błąd 400 gdy request body niepoprawny - [/__tests__/api/results.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/results.test.ts)
+9. Test endpointu results - powinno zwrócić błąd 401 gdy nie ma tokena w zapytaniu - [/__tests__/api/results.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/results.test.ts)
+10. Test endpointu results - powinno zwrócić błąd 500 gdy error bazy danych - [/__tests__/api/results.test.ts](https://github.com/pawel-hajdo/Minesweeper/blob/main/__tests__/api/results.test.ts)
+
+### Dokumentacja API
+- ```POST /api/login``` - logowanie do aplikacji
+- ```POST /api/register``` - rejestracja do aplikacji
+- ```POST /api/logout``` - wylogowanie z aplikacji
+- ```GET /api/results``` - pobranie wyników gier
+- ```POST /api/results``` - wysłanie wyniku gry
+  
+### Przypadki testowe dla testera manualnego
 
 #### 1. **Testowanie rejestracji**
 - **Warunki początkowe**: Aplikacja otwarta na podstronie /register.
@@ -90,3 +133,8 @@ Gra **Saper** to klasyczna gra logiczna, w której celem jest odkrycie wszystkic
   5. Zweryfikuj, czy token sesji został usunięty poprzez sprawdzenie ciasteczek w przeglądarce.
   6. Spróbuj ponownie uzyskać dostęp do chronionych podstron (np. /results).
 - **Oczekiwany wynik**: Użytkownik zostaje wylogowany, następuje przekierowanie na stronę logowania, token jest usunięty, a próba dostępu do chronionych podstron kończy się przekierowaniem na /login.
+
+### Technologie
+Technologie wykorzystane w projekcie to:
+- Next.js (TypeScript)
+- PostgreSQL
